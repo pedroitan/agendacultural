@@ -1,0 +1,40 @@
+---
+import { getGoogleSheetData } from '../../utils/googleSheets';
+import EventPost from '../../layouts/EventPost.astro';
+
+export async function getStaticPaths() {
+  const sheetId = '1184qmC-7mpZtpg15R--il4K3tVxSTAcJUZxpWf9KFAs';
+  const sheetData = await getGoogleSheetData(sheetId);
+  const events = sheetData.map((row: any) => ({
+    params: { 
+      slug: row.evento.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+    },
+    props: {
+      event: {
+        eventName: row.evento || 'Untitled Event',
+        tags: row.tipo_de_evento ? [row.tipo_de_evento] : [],
+        startDate: row.horário_de_início || new Date(),
+        endDate: row.horário_de_término || new Date(),
+        location: row.local || 'Virtual',
+        description: row.descrição || 'No description available',
+        image: row.flyer ? 
+          (row.flyer.startsWith('https://drive.google.com') ?
+            `https://lh3.googleusercontent.com/d/${row.flyer.match(/[\/=]([-\w]{25,})/)?.[1]}=w1000` :
+            (row.flyer.startsWith('http') ? row.flyer : `/images/${row.flyer}`))
+          : '/images/astro-post.jpg'
+      }
+    }
+  }));
+  
+  return events;
+}
+
+const { event } = Astro.props;
+const sheetId = '1184qmC-7mpZtpg15R--il4K3tVxSTAcJUZxpWf9KFAs';
+---
+
+<EventPost event={event}>
+  <div class="prose dark:prose-invert">
+    <p>{event.description}</p>
+  </div>
+</EventPost>

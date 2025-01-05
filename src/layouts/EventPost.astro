@@ -1,0 +1,88 @@
+   ---
+import Layout from './Layout.astro';
+
+type Props = {
+  event: {
+    eventName: string;
+    tags: string[];
+    startDate: Date;
+    endDate: Date;
+    location: string;
+    description: string;
+    image: string;
+  };
+};
+
+const { event } = Astro.props;
+---
+
+  <Layout title={event.eventName} description={event.description}>
+    <article class="max-w-3xl mx-auto px-4">
+      <div class="mb-8">
+        <div class="flex justify-center items-center w-full aspect-video rounded-lg mb-6 overflow-hidden">
+          <img
+            src={event.image}
+            alt={event.eventName}
+            class="h-full w-auto max-w-full object-contain rounded-lg"
+          />
+        </div>
+        <h1 class="text-2xl sm:text-4xl font-bold mb-4">{event.eventName}</h1>
+        <div class="flex flex-wrap items-center gap-2 mb-4">
+          <div class="text-gray-600 dark:text-gray-400">
+            {new Date(event.startDate).toLocaleDateString('pt-BR', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            })} - {new Date(event.endDate).toLocaleDateString('pt-BR', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            })}
+          </div>
+          <span class="text-gray-400">•</span>
+          <div class="text-gray-600 dark:text-gray-400">{event.location}</div>
+        </div>
+      </div>
+      
+      <div class="prose dark:prose-invert max-w-none">
+        {event.tags.length > 0 && (
+          <p class="font-medium">Tipo de evento: {event.tags.join(', ')}</p>
+        )}
+        <slot />
+      </div>
+    </article>
+  </Layout>
+
+<style is:global>
+  .prose {
+    @apply text-gray-900 dark:text-gray-100;
+  }
+  .prose h1, .prose h2, .prose h3, .prose h4 {
+    @apply font-bold mb-4 mt-8;
+  }
+  .prose h1 { @apply text-2xl sm:text-3xl; }
+  .prose h2 { @apply text-xl sm:text-2xl; }
+  .prose h3 { @apply text-lg sm:text-xl; }
+  .prose p { @apply mb-4; }
+  .prose ul, .prose ol { @apply mb-4 ml-4; }
+  .prose li { @apply mb-2; }
+  .prose code {
+    @apply px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-sm;
+  }
+  .prose pre {
+    @apply p-4 rounded-lg bg-gray-100 dark:bg-gray-800 overflow-x-auto mb-4;
+  }
+  .prose pre code {
+    @apply bg-transparent p-0;
+  }
+  .prose a {
+    @apply text-accent-light dark:text-accent-dark hover:underline;
+  }
+  .prose img {
+    @apply rounded-lg;
+  }
+</style>

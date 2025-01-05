@@ -1,0 +1,9 @@
+{
+  "eventName": "Sample Event",
+  "date": "2024-01-15",
+  "location": "Virtual",
+  "description": "This is a sample event description",
+  "image": "/images/astro-post.jpg",
+  "registrationLink": "https://example.com",
+  "tags": ["sample", "virtual"]
+}
