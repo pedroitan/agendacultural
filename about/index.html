@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="en"> <!-- 
+    HTML document structure:
+    - lang="en": Sets language to English
+    - Includes essential meta tags
+    - Responsive viewport
+    - SEO-friendly meta description
+  --> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.1.2"><meta name="description" content="A modern blog built with Astro"><title>About Me</title><link rel="stylesheet" href="/_astro/about.Doiff4R3.css"></head> <body class="bg-theme-light dark:bg-theme-dark text-gray-900 dark:text-gray-100 min-h-screen flex flex-col"> <!-- 
+    Body styling:
+    - bg-theme-light/dark: Light/dark mode background
+    - text-gray-900/dark:text-gray-100: Light/dark mode text
+    - min-h-screen: Minimum full viewport height
+    - flex flex-col: Flex layout with vertical stacking
+  --> <header class="border-b border-gray-200 dark:border-gray-700"> <!-- 
+    Header container styling:
+    - border-b: Bottom border for visual separation
+    - dark:border-gray-700: Dark mode border color
+    - Responsive behavior:
+      * Mobile: Stacked layout with vertical spacing
+      * Desktop: Horizontal layout with gap between elements
+  --> <!-- 
+    Header styling:
+    - border-b: Bottom border for visual separation
+    - dark:border-gray-700: Dark mode border color
+    - Responsive layout:
+      * Mobile: Stacked layout with vertical spacing
+      * Desktop: Horizontal layout with gap between elements
+  --> <nav class="max-w-6xl mx-auto px-4 py-4 sm:py-6 flex flex-col sm:flex-row justify-between items-center gap-4"> <!-- 
+    Navigation structure:
+    - max-w-6xl: Limits width for better readability
+    - mx-auto: Centers the navigation horizontally
+    - px-4: Horizontal padding
+    - py-4 sm:py-6: Responsive vertical padding
+    - flex-col sm:flex-row: Responsive flex direction
+    - justify-between: Space between logo and navigation
+    - items-center: Vertical alignment
+    - gap-4: Spacing between elements
+    - w-full sm:w-auto: Responsive width handling
+  --> <!-- 
+    Navigation structure:
+    - max-w-6xl: Limits width for better readability
+    - mx-auto: Centers the navigation horizontally
+    - px-4: Horizontal padding
+    - py-4 sm:py-6: Responsive vertical padding
+    - flex-col sm:flex-row: Responsive flex direction
+    - justify-between: Space between logo and navigation
+    - items-center: Vertical alignment
+    - gap-4: Spacing between elements
+  --> <a href="/" class="text-xl font-bold">Agenda Cultural Salvador</a> <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full sm:w-auto"> <div class="relative w-full sm:w-64"> <!-- 
+    Search container styling:
+    - relative: For positioning results absolutely
+    - w-full sm:w-64: Responsive width
+  --> <!-- 
+    Search input styling:
+    - px-4 py-2: Padding
+    - rounded-full: Circular corners
+    - bg-gray-100 dark:bg-gray-800: Light/dark mode background
+    - focus:outline-none: Removes default outline
+    - focus:ring-2: Adds focus ring
+    - focus:ring-accent-light/dark: Focus ring color
+  --> <input type="text" id="search" placeholder="Search posts..." class="w-full px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-accent-light dark:focus:ring-accent-dark"> <!-- 
+    Search results container styling:
+    - absolute: Positions relative to search container
+    - left-0 right-0: Full width
+    - mt-2: Margin top
+    - bg-white dark:bg-gray-800: Light/dark mode background
+    - rounded-lg: Rounded corners
+    - shadow-lg: Drop shadow
+    - hidden: Initially hidden
+    - z-50: Ensures results appear above other content
+  --> <div id="searchResults" class="absolute left-0 right-0 mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg hidden z-50"></div> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.qxngTInd.js"></script> <div class="flex items-center gap-6"> <a href="/blog" class="hover:text-accent-light dark:hover:text-accent-dark">Eventos</a> <a href="/about" class="hover:text-accent-light dark:hover:text-accent-dark">Sobre</a> </div> </div> </nav> </header> <button id="themeToggle" class="fixed z-50 bottom-4 right-4 p-2 bg-gray-200 dark:bg-gray-800 rounded-full hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors hidden" aria-label="Toggle theme"> <svg width="24" height="24" class="sun hidden dark:block"> <!-- 
+    Sun icon:
+    - hidden: Initially hidden
+    - dark:block: Visible in dark mode
+    - currentColor: Inherits text color
+  --> <path fill="currentColor" d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path> </svg> <svg width="24" height="24" class="moon dark:hidden"> <!-- 
+    Moon icon:
+    - dark:hidden: Hidden in dark mode
+    - currentColor: Inherits text color
+  --> <path fill="currentColor" d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path> </svg> </button> <script type="module">document.addEventListener("DOMContentLoaded",()=>{const o=localStorage.getItem("theme"),d=window.matchMedia("(prefers-color-scheme: dark)").matches,e=document.documentElement;o==="dark"||!o&&d?(e.classList.add("dark"),e.style.colorScheme="dark"):(e.classList.remove("dark"),e.style.colorScheme="light");const t=document.getElementById("themeToggle");t&&(t.classList.remove("hidden"),t.addEventListener("click",()=>{const s=e.classList.toggle("dark");e.style.colorScheme=s?"dark":"light",localStorage.setItem("theme",s?"dark":"light"),document.body.style.display="none",document.body.offsetHeight,document.body.style.display=""}))});</script> <main class="flex-grow container mx-auto px-4 py-8"> <!-- 
+    Main content styling:
+    - flex-grow: Takes up remaining vertical space
+    - container: Constrains width
+    - mx-auto: Centers content
+    - px-4: Horizontal padding
+    - py-8: Vertical padding
+  -->  <div class="max-w-2xl mx-auto px-4"> <div class="text-center mb-12"> <img src="https://avatars.githubusercontent.com/u/890270?v=4" alt="Profile Picture" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto mb-6 object-cover shadow-lg"> <h1 class="text-3xl sm:text-4xl font-bold mb-4">Melvin Vivas (DonvitoCodes)</h1> <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-400">
+Building with AI. Sharing my journey 🚀
+</p> <p class="text-gray-600 dark:text-gray-400 mt-2">
+Very active on X - let's connect and discuss tech!
+</p> <!-- Links --> <div class="flex flex-col items-center gap-2 mt-4"> <a href="http://aidreamphoto.com" target="_blank" rel="noopener noreferrer" class="text-accent-light dark:text-accent-dark hover:underline">
+🎨 Check out AI Dream Photo
+</a> <a href="https://buymeacoffee.com/donvitocodes" target="_blank" rel="noopener noreferrer" class="text-accent-light dark:text-accent-dark hover:underline">
+☕ Support my work
+</a> <a href="https://cal.com/donvitocodes" target="_blank" rel="noopener noreferrer" class="text-accent-light dark:text-accent-dark hover:underline">
+📅 Schedule a consultation
+</a> </div> <!-- Social Icons --> <div class="flex justify-center gap-6 mt-6"> <a href="https://github.com/donvito" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-400 hover:text-accent-light dark:hover:text-accent-dark transition-colors" aria-label="GitHub"> <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"> <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path> </svg> </a> <a href="https://x.com/donvito" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-400 hover:text-accent-light dark:hover:text-accent-dark transition-colors" aria-label="Twitter"> <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path> </svg> </a> <a href="https://www.linkedin.com/in/melvinvivas/" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-400 hover:text-accent-light dark:hover:text-accent-dark transition-colors" aria-label="LinkedIn"> <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"> <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path> </svg> </a> </div> </div> <div class="prose dark:prose-invert mx-auto"> <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 sm:p-6 mb-8"> <h2 class="text-xl sm:text-2xl font-bold mb-4">About Me</h2> <p class="mb-4">
+Hi! I'm Melvin Vivas (DonvitoCodes), a software engineer and writer focused on leveraging AI for software development
+          and business solutions. I'm passionate about sharing insights and experiences on how AI can transform the way we build
+          software and run businesses.
+</p> <p class="mb-4">
+I'm very active on X (@donvito), where I regularly share insights about AI applications in software development
+          and business use cases. Feel free to reach out and connect with me there - I love engaging with fellow developers
+          and tech enthusiasts!
+</p> <p>
+When I'm not coding or writing, you can find me exploring new AI technologies,
+          contributing to open-source projects, or helping businesses implement AI solutions.
+</p> </div> <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 sm:p-6"> <h2 class="text-xl sm:text-2xl font-bold mb-4">Skills & Expertise</h2> <div class="grid grid-cols-1 sm:grid-cols-2 gap-4"> <div> <h3 class="font-semibold mb-2">Languages</h3> <ul class="list-disc list-inside"> <li>JavaScript/TypeScript</li> <li>Python</li> <li>Go</li> <li>Java</li> </ul> </div> <div> <h3 class="font-semibold mb-2">Technologies</h3> <ul class="list-disc list-inside"> <li>React/Next.js</li> <li>Node.js</li> <li>AWS</li> <li>AI/ML</li> </ul> </div> </div> </div> </div> </div>  </main> <footer class="max-w-3xl mx-auto px-4 py-8 text-center text-gray-600 dark:text-gray-400"> <!-- 
+    Footer container styling:
+    - max-w-3xl: Constrains width for readability
+    - mx-auto: Centers content horizontally
+    - px-4: Horizontal padding
+    - py-8: Vertical padding
+    - text-center: Centers text content
+    - text-gray-600/dark:text-gray-400: Light/dark mode text colors
+  --> <!-- 
+    Footer styling:
+    - max-w-3xl: Limits width for better readability
+    - mx-auto: Centers the footer horizontally
+    - px-4: Horizontal padding
+    - py-8: Vertical padding
+    - text-center: Centers text
+    - text-gray-600/dark:text-gray-400: Light/dark mode text colors
+  --> <p>&copy; 2025 Itan Tech. All rights reserved.</p> </footer> <script type="module">const e=typeof localStorage<"u"&&localStorage.getItem("theme")?localStorage.getItem("theme"):window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";e==="light"?document.documentElement.classList.remove("dark"):document.documentElement.classList.add("dark");window.localStorage.setItem("theme",e);</script> </body> </html>
