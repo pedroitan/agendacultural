@@ -1,0 +1,104 @@
+<!DOCTYPE html><html lang="en"> <!-- 
+    HTML document structure:
+    - lang="en": Sets language to English
+    - Includes essential meta tags
+    - Responsive viewport
+    - SEO-friendly meta description
+  --> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.1.2"><meta name="description" content="A modern blog built with Astro"><title>Kwanzaa HipHop</title><link rel="stylesheet" href="/_astro/about.Doiff4R3.css">
+<style>.prose{--tw-text-opacity: 1;color:rgb(17 24 39 / var(--tw-text-opacity, 1))}.prose:is(.dark *){--tw-text-opacity: 1;color:rgb(243 244 246 / var(--tw-text-opacity, 1))}.prose h1,.prose h2,.prose h3,.prose h4{margin-bottom:1rem;margin-top:2rem;font-weight:700}.prose h1{font-size:1.5rem;line-height:2rem}@media (min-width: 640px){.prose h1{font-size:1.875rem;line-height:2.25rem}}.prose h2{font-size:1.25rem;line-height:1.75rem}@media (min-width: 640px){.prose h2{font-size:1.5rem;line-height:2rem}}.prose h3{font-size:1.125rem;line-height:1.75rem}@media (min-width: 640px){.prose h3{font-size:1.25rem;line-height:1.75rem}}.prose p{margin-bottom:1rem}.prose ul,.prose ol{margin-bottom:1rem;margin-left:1rem}.prose li{margin-bottom:.5rem}.prose code{border-radius:.25rem;--tw-bg-opacity: 1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1));padding:.125rem .25rem;font-size:.875rem;line-height:1.25rem}.prose code:is(.dark *){--tw-bg-opacity: 1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.prose pre{margin-bottom:1rem;overflow-x:auto;border-radius:.5rem;--tw-bg-opacity: 1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1));padding:1rem}.prose pre:is(.dark *){--tw-bg-opacity: 1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.prose pre code{background-color:transparent;padding:0}.prose a{--tw-text-opacity: 1;color:rgb(37 99 235 / var(--tw-text-opacity, 1))}.prose a:hover{text-decoration-line:underline}.prose a:is(.dark *){--tw-text-opacity: 1;color:rgb(96 165 250 / var(--tw-text-opacity, 1))}.prose img{border-radius:.5rem}
+</style></head> <body class="bg-theme-light dark:bg-theme-dark text-gray-900 dark:text-gray-100 min-h-screen flex flex-col"> <!-- 
+    Body styling:
+    - bg-theme-light/dark: Light/dark mode background
+    - text-gray-900/dark:text-gray-100: Light/dark mode text
+    - min-h-screen: Minimum full viewport height
+    - flex flex-col: Flex layout with vertical stacking
+  --> <header class="border-b border-gray-200 dark:border-gray-700"> <!-- 
+    Header container styling:
+    - border-b: Bottom border for visual separation
+    - dark:border-gray-700: Dark mode border color
+    - Responsive behavior:
+      * Mobile: Stacked layout with vertical spacing
+      * Desktop: Horizontal layout with gap between elements
+  --> <!-- 
+    Header styling:
+    - border-b: Bottom border for visual separation
+    - dark:border-gray-700: Dark mode border color
+    - Responsive layout:
+      * Mobile: Stacked layout with vertical spacing
+      * Desktop: Horizontal layout with gap between elements
+  --> <nav class="max-w-6xl mx-auto px-4 py-4 sm:py-6 flex flex-col sm:flex-row justify-between items-center gap-4"> <!-- 
+    Navigation structure:
+    - max-w-6xl: Limits width for better readability
+    - mx-auto: Centers the navigation horizontally
+    - px-4: Horizontal padding
+    - py-4 sm:py-6: Responsive vertical padding
+    - flex-col sm:flex-row: Responsive flex direction
+    - justify-between: Space between logo and navigation
+    - items-center: Vertical alignment
+    - gap-4: Spacing between elements
+    - w-full sm:w-auto: Responsive width handling
+  --> <!-- 
+    Navigation structure:
+    - max-w-6xl: Limits width for better readability
+    - mx-auto: Centers the navigation horizontally
+    - px-4: Horizontal padding
+    - py-4 sm:py-6: Responsive vertical padding
+    - flex-col sm:flex-row: Responsive flex direction
+    - justify-between: Space between logo and navigation
+    - items-center: Vertical alignment
+    - gap-4: Spacing between elements
+  --> <a href="/" class="text-xl font-bold">Agenda Cultural Salvador</a> <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full sm:w-auto"> <div class="relative w-full sm:w-64"> <!-- 
+    Search container styling:
+    - relative: For positioning results absolutely
+    - w-full sm:w-64: Responsive width
+  --> <!-- 
+    Search input styling:
+    - px-4 py-2: Padding
+    - rounded-full: Circular corners
+    - bg-gray-100 dark:bg-gray-800: Light/dark mode background
+    - focus:outline-none: Removes default outline
+    - focus:ring-2: Adds focus ring
+    - focus:ring-accent-light/dark: Focus ring color
+  --> <input type="text" id="search" placeholder="Search posts..." class="w-full px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-accent-light dark:focus:ring-accent-dark"> <!-- 
+    Search results container styling:
+    - absolute: Positions relative to search container
+    - left-0 right-0: Full width
+    - mt-2: Margin top
+    - bg-white dark:bg-gray-800: Light/dark mode background
+    - rounded-lg: Rounded corners
+    - shadow-lg: Drop shadow
+    - hidden: Initially hidden
+    - z-50: Ensures results appear above other content
+  --> <div id="searchResults" class="absolute left-0 right-0 mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg hidden z-50"></div> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.qxngTInd.js"></script> <div class="flex items-center gap-6"> <a href="/blog" class="hover:text-accent-light dark:hover:text-accent-dark">Eventos</a> <a href="/about" class="hover:text-accent-light dark:hover:text-accent-dark">Sobre</a> </div> </div> </nav> </header> <button id="themeToggle" class="fixed z-50 bottom-4 right-4 p-2 bg-gray-200 dark:bg-gray-800 rounded-full hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors hidden" aria-label="Toggle theme"> <svg width="24" height="24" class="sun hidden dark:block"> <!-- 
+    Sun icon:
+    - hidden: Initially hidden
+    - dark:block: Visible in dark mode
+    - currentColor: Inherits text color
+  --> <path fill="currentColor" d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path> </svg> <svg width="24" height="24" class="moon dark:hidden"> <!-- 
+    Moon icon:
+    - dark:hidden: Hidden in dark mode
+    - currentColor: Inherits text color
+  --> <path fill="currentColor" d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path> </svg> </button> <script type="module">document.addEventListener("DOMContentLoaded",()=>{const o=localStorage.getItem("theme"),d=window.matchMedia("(prefers-color-scheme: dark)").matches,e=document.documentElement;o==="dark"||!o&&d?(e.classList.add("dark"),e.style.colorScheme="dark"):(e.classList.remove("dark"),e.style.colorScheme="light");const t=document.getElementById("themeToggle");t&&(t.classList.remove("hidden"),t.addEventListener("click",()=>{const s=e.classList.toggle("dark");e.style.colorScheme=s?"dark":"light",localStorage.setItem("theme",s?"dark":"light"),document.body.style.display="none",document.body.offsetHeight,document.body.style.display=""}))});</script> <main class="flex-grow container mx-auto px-4 py-8"> <!-- 
+    Main content styling:
+    - flex-grow: Takes up remaining vertical space
+    - container: Constrains width
+    - mx-auto: Centers content
+    - px-4: Horizontal padding
+    - py-8: Vertical padding
+  -->  <article class="max-w-3xl mx-auto px-4"> <div class="mb-8"> <div class="flex justify-center items-center w-full aspect-video rounded-lg mb-6 overflow-hidden"> <img src="/images/Poesia, Dança, Arte Graffiti" alt="Kwanzaa HipHop" class="h-full w-auto max-w-full object-contain rounded-lg"> </div> <h1 class="text-2xl sm:text-4xl font-bold mb-4">Kwanzaa HipHop</h1> <div class="flex flex-wrap items-center gap-2 mb-4"> <div class="text-gray-600 dark:text-gray-400"> 12 de jan. </div> <span class="text-gray-400">•</span> <div class="text-gray-600 dark:text-gray-400"> 00:00 </div> <span class="text-gray-400">•</span> <div class="text-gray-600 dark:text-gray-400">Date(2025,0,29,20,0,0)</div> </div> </div> </article>  </main> <footer class="max-w-3xl mx-auto px-4 py-8 text-center text-gray-600 dark:text-gray-400"> <!-- 
+    Footer container styling:
+    - max-w-3xl: Constrains width for readability
+    - mx-auto: Centers content horizontally
+    - px-4: Horizontal padding
+    - py-8: Vertical padding
+    - text-center: Centers text content
+    - text-gray-600/dark:text-gray-400: Light/dark mode text colors
+  --> <!-- 
+    Footer styling:
+    - max-w-3xl: Limits width for better readability
+    - mx-auto: Centers the footer horizontally
+    - px-4: Horizontal padding
+    - py-8: Vertical padding
+    - text-center: Centers text
+    - text-gray-600/dark:text-gray-400: Light/dark mode text colors
+  --> <p>&copy; 2025 Itan Tech. All rights reserved.</p> </footer> <script type="module">const e=typeof localStorage<"u"&&localStorage.getItem("theme")?localStorage.getItem("theme"):window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";e==="light"?document.documentElement.classList.remove("dark"):document.documentElement.classList.add("dark");window.localStorage.setItem("theme",e);</script> </body> </html> 
