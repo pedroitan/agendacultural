@@ -1,7 +1,32 @@
 ---
+/**
+ * Footer Component
+ * @description Site footer displaying copyright information
+ * @component
+ * @example
+ * <Footer />
+ */
 const year = new Date().getFullYear();
 ---
 
 <footer class="max-w-3xl mx-auto px-4 py-8 text-center text-gray-600 dark:text-gray-400">
+  <!-- 
+    Footer container styling:
+    - max-w-3xl: Constrains width for readability
+    - mx-auto: Centers content horizontally
+    - px-4: Horizontal padding
+    - py-8: Vertical padding
+    - text-center: Centers text content
+    - text-gray-600/dark:text-gray-400: Light/dark mode text colors
+  -->
+  <!-- 
+    Footer styling:
+    - max-w-3xl: Limits width for better readability
+    - mx-auto: Centers the footer horizontally
+    - px-4: Horizontal padding
+    - py-8: Vertical padding
+    - text-center: Centers text
+    - text-gray-600/dark:text-gray-400: Light/dark mode text colors
+  -->
   <p>&copy; {year} Itan Tech. All rights reserved.</p>
 </footer>

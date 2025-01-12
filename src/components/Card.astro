@@ -1,4 +1,17 @@
 ---
+/**
+ * Card Component
+ * @description Reusable card component for displaying linked content
+ * @component
+ */
+
+/**
+ * Card component properties
+ * @interface Props
+ * @property {string} title - The card title
+ * @property {string} body - The card content text
+ * @property {string} href - The URL the card links to
+ */
 interface Props {
 	title: string;
 	body: string;
@@ -9,7 +22,27 @@ const { href, title, body } = Astro.props;
 ---
 
 <li class="link-card">
+  <!-- 
+    Card container styling:
+    - list-style: none: Removes default list styling
+    - display: flex: Enables flex layout
+    - padding: 1px: Creates space for hover effect
+    - background-color: Base dark background
+    - border-radius: 7px: Rounded corners
+    - transition: Smooth background animation
+    - box-shadow: Subtle inset border
+  -->
 	<a href={href}>
+  <!-- 
+    Link styling:
+    - width: 100%: Full width container
+    - text-decoration: none: Removes underline
+    - padding: Inner spacing
+    - border-radius: 8px: Rounded corners
+    - color: white: Text color
+    - background-color: Dark background
+    - opacity: 0.8: Slightly transparent
+  -->
 		<h2>
 			{title}
 			<span>&rarr;</span>
@@ -20,6 +53,14 @@ const { href, title, body } = Astro.props;
 	</a>
 </li>
 <style>
+/**
+ * Card component styles
+ * @description Provides hover effects and responsive styling
+ * - Gradient background animation on hover
+ * - Smooth transitions for interactive elements
+ * - Accessible focus states
+ * - Responsive typography and spacing
+ */
 	.link-card {
 		list-style: none;
 		display: flex;

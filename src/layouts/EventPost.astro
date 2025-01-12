@@ -1,14 +1,39 @@
    ---
+/**
+ * Event Post Layout Component
+ * @description Layout template for individual event posts
+ * @component
+ * @example
+ * <EventPost event={event} />
+ * 
+ * Features:
+ * - Responsive design
+ * - Event date and location formatting
+ * - Prose styling for markdown content
+ * - Tag support
+ * - Dark mode support
+ */
 import Layout from './Layout.astro';
 
+/**
+ * Event Post component properties
+ * @type Props
+ * @property {object} event - The event data
+ * @property {string} event.eventName - Name of the event
+ * @property {string[]} event.tags - Event tags/categories
+ * @property {Date} event.startDate - Event start date
+ * @property {Date} event.endDate - Event end date
+ * @property {string} event.location - Event location
+ * @property {string} event.description - Event description
+ * @property {string} event.image - Event image URL
+ */
 type Props = {
   event: {
     eventName: string;
     tags: string[];
-    startDate: Date;
-    endDate: Date;
+    date: Date;
+    time: string;
     location: string;
-    description: string;
     image: string;
   };
 };
@@ -16,7 +41,7 @@ type Props = {
 const { event } = Astro.props;
 ---
 
-  <Layout title={event.eventName} description={event.description}>
+  <Layout title={event.eventName}>
     <article class="max-w-3xl mx-auto px-4">
       <div class="mb-8">
         <div class="flex justify-center items-center w-full aspect-video rounded-lg mb-6 overflow-hidden">
@@ -29,35 +54,30 @@ const { event } = Astro.props;
         <h1 class="text-2xl sm:text-4xl font-bold mb-4">{event.eventName}</h1>
         <div class="flex flex-wrap items-center gap-2 mb-4">
           <div class="text-gray-600 dark:text-gray-400">
-            {new Date(event.startDate).toLocaleDateString('pt-BR', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit'
-            })} - {new Date(event.endDate).toLocaleDateString('pt-BR', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit'
+            {event.date.toLocaleDateString('pt-BR', {
+              day: '2-digit',
+              month: 'short'
             })}
+          </div>
+          <span class="text-gray-400">•</span>
+          <div class="text-gray-600 dark:text-gray-400">
+            {event.time}
           </div>
           <span class="text-gray-400">•</span>
           <div class="text-gray-600 dark:text-gray-400">{event.location}</div>
         </div>
       </div>
-      
-      <div class="prose dark:prose-invert max-w-none">
-        {event.tags.length > 0 && (
-          <p class="font-medium">Tipo de evento: {event.tags.join(', ')}</p>
-        )}
-        <slot />
-      </div>
     </article>
   </Layout>
 
 <style is:global>
+/**
+ * Global prose styles for markdown content
+ * - Typography and spacing
+ * - Code blocks and syntax highlighting
+ * - Links and images
+ * - Dark mode support
+ */
   .prose {
     @apply text-gray-900 dark:text-gray-100;
   }

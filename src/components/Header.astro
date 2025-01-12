@@ -1,9 +1,55 @@
 ---
+/**
+ * Header Component
+ * @description Site header containing navigation and search functionality
+ * @component
+ * @example
+ * <Header />
+ */
 import Search from './Search.astro';
 ---
 
 <header class="border-b border-gray-200 dark:border-gray-700">
+  <!-- 
+    Header container styling:
+    - border-b: Bottom border for visual separation
+    - dark:border-gray-700: Dark mode border color
+    - Responsive behavior:
+      * Mobile: Stacked layout with vertical spacing
+      * Desktop: Horizontal layout with gap between elements
+  -->
+  <!-- 
+    Header styling:
+    - border-b: Bottom border for visual separation
+    - dark:border-gray-700: Dark mode border color
+    - Responsive layout:
+      * Mobile: Stacked layout with vertical spacing
+      * Desktop: Horizontal layout with gap between elements
+  -->
   <nav class="max-w-6xl mx-auto px-4 py-4 sm:py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+  <!-- 
+    Navigation structure:
+    - max-w-6xl: Limits width for better readability
+    - mx-auto: Centers the navigation horizontally
+    - px-4: Horizontal padding
+    - py-4 sm:py-6: Responsive vertical padding
+    - flex-col sm:flex-row: Responsive flex direction
+    - justify-between: Space between logo and navigation
+    - items-center: Vertical alignment
+    - gap-4: Spacing between elements
+    - w-full sm:w-auto: Responsive width handling
+  -->
+  <!-- 
+    Navigation structure:
+    - max-w-6xl: Limits width for better readability
+    - mx-auto: Centers the navigation horizontally
+    - px-4: Horizontal padding
+    - py-4 sm:py-6: Responsive vertical padding
+    - flex-col sm:flex-row: Responsive flex direction
+    - justify-between: Space between logo and navigation
+    - items-center: Vertical alignment
+    - gap-4: Spacing between elements
+  -->
     <a href="/" class="text-xl font-bold">Agenda Cultural Salvador</a>
     <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full sm:w-auto">
       <Search />

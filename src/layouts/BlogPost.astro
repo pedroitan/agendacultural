@@ -1,7 +1,25 @@
 ---
+/**
+ * Blog Post Layout Component
+ * @description Layout template for individual blog posts
+ * @component
+ * @example
+ * <BlogPost post={post} />
+ * 
+ * Features:
+ * - Responsive design
+ * - Prose styling for markdown content
+ * - Tag support with filtering
+ * - Dark mode support
+ */
 import Layout from './Layout.astro';
 import type { CollectionEntry } from 'astro:content';
 
+/**
+ * Blog Post component properties
+ * @type Props
+ * @property {CollectionEntry<'blog'>} post - The blog post data from content collection
+ */
 type Props = {
   post: CollectionEntry<'blog'>;
 };
@@ -12,7 +30,18 @@ const { title, description, pubDate, image, tags } = post.data;
 
 <Layout title={title} description={description}>
   <article class="max-w-3xl mx-auto px-4">
+  <!-- 
+    Article container styling:
+    - max-w-3xl: Constrains width for readability
+    - mx-auto: Centers content
+    - px-4: Horizontal padding
+  -->
     <div class="mb-8">
+  <!-- 
+    Post header styling:
+    - mb-8: Bottom margin for spacing
+    - Contains post image, title, date and tags
+  -->
       <img
         src={image}
         alt={title}
@@ -40,12 +69,47 @@ const { title, description, pubDate, image, tags } = post.data;
     </div>
     
     <div class="prose dark:prose-invert max-w-none">
+  <!-- 
+    Markdown content container:
+    - prose: Applies Tailwind typography styles
+    - dark:prose-invert: Dark mode support
+    - max-w-none: Removes max-width constraint
+    - Handles:
+      * Headings (h1-h6)
+      * Paragraphs and lists
+      * Code blocks and syntax highlighting
+      * Links and images
+      * Blockquotes and tables
+  -->
+  <!-- 
+    Markdown content styling:
+    - prose: Applies Tailwind typography
+    - dark:prose-invert: Dark mode support
+    - max-w-none: Removes max-width constraint
+  -->
       <slot />
     </div>
   </article>
 </Layout>
 
 <style is:global>
+/**
+ * Global prose styles for markdown content
+ * 
+ * Features:
+ * - Responsive typography
+ * - Consistent spacing
+ * - Syntax highlighting
+ * - Dark mode support
+ * - Accessible color contrast
+ * 
+ * Elements styled:
+ * - Headings (h1-h6)
+ * - Paragraphs and lists
+ * - Code blocks and inline code
+ * - Links and images
+ * - Blockquotes and tables
+ */
   .prose {
     @apply text-gray-900 dark:text-gray-100;
   }

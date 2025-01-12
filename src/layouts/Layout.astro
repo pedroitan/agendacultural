@@ -1,8 +1,29 @@
 ---
+/**
+ * Main Layout Component
+ * @description Base layout template for all pages
+ * @component
+ * @example
+ * <Layout title="Page Title">
+ *   <!-- Page content -->
+ * </Layout>
+ * 
+ * Features:
+ * - Handles theme initialization
+ * - Includes Header, Footer, and ThemeToggle
+ * - Responsive design
+ * - SEO-friendly meta tags
+ */
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 
+/**
+ * Layout component properties
+ * @interface Props
+ * @property {string} title - Page title
+ * @property {string} [description] - Optional page description
+ */
 interface Props {
   title: string;
   description?: string;
@@ -13,6 +34,13 @@ const { title, description = 'A modern blog built with Astro' } = Astro.props;
 
 <!doctype html>
 <html lang="en">
+  <!-- 
+    HTML document structure:
+    - lang="en": Sets language to English
+    - Includes essential meta tags
+    - Responsive viewport
+    - SEO-friendly meta description
+  -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -22,13 +50,44 @@ const { title, description = 'A modern blog built with Astro' } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="bg-theme-light dark:bg-theme-dark text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
+  <!-- 
+    Body styling:
+    - bg-theme-light/dark: Light/dark mode background
+    - text-gray-900/dark:text-gray-100: Light/dark mode text
+    - min-h-screen: Minimum full viewport height
+    - flex flex-col: Flex layout with vertical stacking
+  -->
     <Header />
     <ThemeToggle />
     <main class="flex-grow container mx-auto px-4 py-8">
+  <!-- 
+    Main content styling:
+    - flex-grow: Takes up remaining vertical space
+    - container: Constrains width
+    - mx-auto: Centers content
+    - px-4: Horizontal padding
+    - py-8: Vertical padding
+  -->
       <slot />
     </main>
     <Footer />
     <script>
+/**
+ * Theme initialization process
+ * 
+ * Priority:
+ * 1. Check localStorage for saved theme
+ * 2. Check system preference (prefers-color-scheme)
+ * 3. Default to light theme
+ * 
+ * Implementation:
+ * - Immediately invoked function expression (IIFE)
+ * - Sets theme class on documentElement
+ * - Persists theme in localStorage
+ * - Handles edge cases:
+ *   * localStorage unavailable
+ *   * prefers-color-scheme unsupported
+ */
       const theme = (() => {
         if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
           return localStorage.getItem('theme');

@@ -1,13 +1,51 @@
 ---
+/**
+ * Search Component
+ * @description Client-side search component using Fuse.js
+ * @component
+ * @example
+ * <Search />
+ * 
+ * Features:
+ * - Fuzzy search using Fuse.js
+ * - Live results as you type
+ * - Click outside to close results
+ * - Dark mode support
+ */
 ---
 
 <div class="relative w-full sm:w-64">
+  <!-- 
+    Search container styling:
+    - relative: For positioning results absolutely
+    - w-full sm:w-64: Responsive width
+  -->
+  <!-- 
+    Search input styling:
+    - px-4 py-2: Padding
+    - rounded-full: Circular corners
+    - bg-gray-100 dark:bg-gray-800: Light/dark mode background
+    - focus:outline-none: Removes default outline
+    - focus:ring-2: Adds focus ring
+    - focus:ring-accent-light/dark: Focus ring color
+  -->
   <input
     type="text"
     id="search"
     placeholder="Search posts..."
     class="w-full px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-accent-light dark:focus:ring-accent-dark"
   />
+  <!-- 
+    Search results container styling:
+    - absolute: Positions relative to search container
+    - left-0 right-0: Full width
+    - mt-2: Margin top
+    - bg-white dark:bg-gray-800: Light/dark mode background
+    - rounded-lg: Rounded corners
+    - shadow-lg: Drop shadow
+    - hidden: Initially hidden
+    - z-50: Ensures results appear above other content
+  -->
   <div
     id="searchResults"
     class="absolute left-0 right-0 mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg hidden z-50"
@@ -16,6 +54,26 @@
 </div>
 
 <script>
+/**
+ * Search functionality implementation
+ * 
+ * Key Features:
+ * - Fuse.js configuration:
+ *   * keys: ['title', 'description'] - Searchable fields
+ *   * threshold: 0.3 - Fuzzy search sensitivity
+ * - Event handling:
+ *   * Input: Triggers search on typing
+ *   * Click outside: Hides results
+ * - Performance optimizations:
+ *   * Limits results to 5 items
+ *   * Debounced input handling
+ * 
+ * Data Flow:
+ * 1. Load search index from /search.json
+ * 2. Initialize Fuse.js with search options
+ * 3. Handle input events and display results
+ * 4. Manage result visibility
+ */
   import Fuse from 'fuse.js';
 
   const posts = await fetch('/search.json').then(res => res.json());

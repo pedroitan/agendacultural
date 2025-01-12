@@ -1,14 +1,78 @@
-// Cache implementation with versioning
+/**
+ * Google Sheets API Utilities
+ * @module googleSheets
+ * @description Provides functions for fetching and processing data from Google Sheets
+ * @see {@link https://developers.google.com/sheets/api}
+ */
+
+/**
+ * Cache implementation with versioning
+ * @type {Map<string, { data: any, timestamp: number, version: number }>}
+ * @description 
+ * - Key: `${sheetId}-${gid}` 
+ * - Value: { data: processed sheet data, timestamp: last fetch time, version: cache version }
+ */
 const cache = new Map<string, { data: any, timestamp: number, version: number }>();
+/**
+ * Cache structure details:
+ * - Key format: `${sheetId}-${gid}`
+ * - Value structure:
+ *   - data: Processed sheet data
+ *   - timestamp: Last fetch time in milliseconds
+ *   - version: Cache version number for change tracking
+ * - Cache invalidation occurs:
+ *   - After POLL_INTERVAL (1 minute)
+ *   - On webhook updates
+ *   - When version changes
+ */
+
+/**
+ * Current cache version
+ * @type {number}
+ * @description Incremented with each cache update to track changes
+ */
 let currentVersion = 0;
 
-// Polling interval (1 minute)
+/**
+ * Polling interval for cache refresh
+ * @constant {number}
+ * @default 60000 (1 minute)
+ */
 const POLL_INTERVAL = 1 * 60 * 1000;
 
-// Last modified timestamp
+/**
+ * Last modified timestamp
+ * @type {number}
+ * @description Tracks when the sheet data was last updated
+ */
 let lastModified = Date.now();
 
+/**
+ * Fetches and processes data from a Google Sheet
+ * @async
+ * @function getGoogleSheetData
+ * @param {string} sheetId - The ID of the Google Sheet
+ * @param {string} [gid='0'] - The grid ID of the specific sheet tab
+ * @returns {Promise<Array<Object>>} - Processed data from the sheet
+ * @throws Will throw an error if the request fails
+ * @example
+ * const data = await getGoogleSheetData('1A2B3C4D5E6F7G8H9I0J');
+ */
 export async function getGoogleSheetData(sheetId: string, gid: string = '0') {
+  /**
+   * Data fetching workflow:
+   * 1. Check cache for existing data
+   * 2. If cache is stale or missing:
+   *    - Fetch fresh data from Google Sheets
+   *    - Parse and transform response
+   *    - Update cache with new version
+   * 3. Return processed data
+   * 
+   * Error handling:
+   * - Invalid sheet IDs return empty array
+   * - Network errors are logged and return empty array
+   * - Malformed responses are logged and return empty array
+   */
   const cacheKey = `${sheetId}-${gid}`;
   
   // Check if we need to refresh
@@ -35,65 +99,51 @@ export async function getGoogleSheetData(sheetId: string, gid: string = '0') {
     
     const data = rows.map((row: any) => {
       const obj: any = {};
-      row.c.forEach((cell: any, index: number) => {
-        // Handle Google Sheets date format
-        if (typeof cell?.v === 'string') {
-            // Handle date and time parsing
-            if (typeof cell.v === 'string') {
-              if (cell.f) {
-                // Parse formatted date string (dd/MM/yyyy HH:mm:ss)
-                const [datePart, timePart] = cell.f.split(' ');
-                const [day, month, year] = datePart.split('/').map(Number);
-                const [hours, minutes, seconds] = timePart.split(':').map(Number);
-                
-                // Create date in UTC
-                const date = new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds));
-                obj[headers[index]] = date;
-              } else {
-                // Fallback to raw value parsing
-                const dateMatch = cell.v.match(/Date\((\d{4}),(\d+),(\d+),(\d+),(\d+),(\d+)\)/);
-                if (dateMatch) {
-                  const year = parseInt(dateMatch[1]);
-                  const month = parseInt(dateMatch[2]);
-                  const day = parseInt(dateMatch[3]);
-                  const hours = parseInt(dateMatch[4]);
-                  const minutes = parseInt(dateMatch[5]);
-                  const seconds = parseInt(dateMatch[6]);
-                  const date = new Date(Date.UTC(year, month, day, hours, minutes, seconds));
-                  obj[headers[index]] = date;
-                } else {
-                  // Try parsing as ISO date string
-                  const isoDate = new Date(cell.v);
-                  if (!isNaN(isoDate.getTime())) {
-                    obj[headers[index]] = isoDate;
-                  } else {
-                    // Handle time strings in format "20:00"
-                    const timeMatch = cell.v.match(/^(\d{1,2}):(\d{2})$/);
-                    if (timeMatch) {
-                      const hours = parseInt(timeMatch[1]);
-                      const minutes = parseInt(timeMatch[2]);
-                      const date = new Date();
-                      date.setHours(hours);
-                      date.setMinutes(minutes);
-                      date.setSeconds(0);
-                      obj[headers[index]] = date;
-                    } else {
-                      obj[headers[index]] = cell.v;
-                    }
-                  }
-                }
-              }
-            } else {
-              obj[headers[index]] = cell?.v || null;
-            }
+      const cells = row.c;
+      
+      // Map new column structure
+      obj.evento = cells[0]?.v || null; // Title (A)
+      
+      // Parse date and time from separate columns
+      const dateStr = cells[1]?.v || '';
+      const timeStr = cells[2]?.v || '';
+      
+      // Parse date
+      if (dateStr) {
+        const [day, month, year] = dateStr.split('/').map(Number);
+        if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
+          obj.date = new Date(Date.UTC(year, month - 1, day));
         } else {
-          obj[headers[index]] = cell?.v || null;
+          console.warn('Invalid date format in row:', row);
+          obj.date = null;
         }
-      });
+      } else {
+        obj.date = null;
+      }
+      
+      // Parse time
+      if (timeStr) {
+        const [hours, minutes] = timeStr.split(':').map(Number);
+        if (!isNaN(hours) && !isNaN(minutes)) {
+          obj.time = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        } else {
+          console.warn('Invalid time format in row:', row);
+          obj.time = null;
+        }
+      } else {
+        obj.time = null;
+      }
+      
+      obj.local = cells[3]?.v || null; // Location (D)
+      obj.tipo_evento = cells[4]?.v || null; // Type (E)
+      obj.url = cells[5]?.v || null; // URL (F)
+      obj.flyer = cells[6]?.v || null; // Image URL (G)
+      
       return obj;
     });
     
-    console.log('Transformed data:', data);
+    console.log('Transformed data:', JSON.stringify(data, null, 2));
+    console.log('First 3 rows:', JSON.stringify(data.slice(0, 3), null, 2));
     
     // Update cache with new version
     const newVersion = currentVersion + 1;
@@ -108,12 +158,63 @@ export async function getGoogleSheetData(sheetId: string, gid: string = '0') {
     
     return data;
   } catch (error) {
-    console.error('Error fetching Google Sheet data:', error);
-    return [];
+    /**
+     * Error handling:
+     * - Logs detailed error information
+     * - Returns empty array to prevent app crashes
+     * - Preserves existing cache if available
+     * - Includes error type and stack trace
+     */
+    if (error instanceof Error) {
+      console.error('Error fetching Google Sheet data:', {
+        message: error.message,
+        stack: error.stack,
+        type: error.name,
+        timestamp: Date.now()
+      });
+    } else {
+      console.error('Unknown error fetching Google Sheet data:', error);
+    }
+    return cache.get(cacheKey)?.data || [];
   }
 }
 
-// Webhook handler for Google Sheets updates
+/**
+ * Handles webhook updates from Google Sheets
+ * @async
+ * @function handleWebhookUpdate
+ * @param {string} sheetId - The ID of the Google Sheet
+ * @param {string} [gid='0'] - The grid ID of the specific sheet tab
+ * @returns {Promise<Array<Object>>} - Updated data from the sheet
+ * @description Invalidates cache and optionally triggers a new fetch
+ * @example
+ * await handleWebhookUpdate('1A2B3C4D5E6F7G8H9I0J');
+ */
+/**
+ * Updates Google Sheet with new data
+ * @async
+ * @function updateGoogleSheet
+ * @param {string} sheetId - The ID of the Google Sheet
+ * @param {Array<Object>} data - Array of event data to update
+ * @returns {Promise<void>}
+ * @throws Will throw an error if the update fails
+ */
+/**
+ * Updates Google Sheet with new data
+ * @async
+ * @function updateGoogleSheet
+ * @param {string} sheetId - The ID of the Google Sheet
+ * @param {Array<Object>} data - Array of event data to update
+ * @returns {Promise<void>}
+ * @throws Will throw an error if the update fails
+ * @todo Implement Google Sheets API update functionality
+ */
+export async function updateGoogleSheet(sheetId: string, data: any[]) {
+  // TODO: Implement Google Sheets API update functionality
+  console.log('Updating Google Sheet:', sheetId);
+  console.log('Data to update:', data);
+}
+
 export async function handleWebhookUpdate(sheetId: string, gid: string = '0') {
   const cacheKey = `${sheetId}-${gid}`;
   cache.delete(cacheKey); // Invalidate cache

@@ -5,8 +5,26 @@ import { getGoogleSheetData } from '../utils/googleSheets';
 // Extract sheet ID from URL
 const sheetId = '1184qmC-7mpZtpg15R--il4K3tVxSTAcJUZxpWf9KFAs';
 
+// Run scraper to update events
+try {
+  const scraperResponse = await fetch('/api/scrape');
+  if (!scraperResponse.ok) {
+    console.error('Scraper API error:', await scraperResponse.text());
+  }
+} catch (error) {
+  console.error('Error running scraper:', error);
+}
+
 // Fetch and transform data from Google Sheets
-const sheetData = await getGoogleSheetData(sheetId);
+/**
+ * Data transformation process:
+ * - Fetches raw data from Google Sheets
+ * - Maps sheet rows to event objects
+ * - Handles missing data with defaults
+ * - Generates slugs for URLs
+ * - Sorts events by start date
+ */
+const sheetData = await getGoogleSheetData(sheetId, '2043142206');
 const events = sheetData.map((row: any) => ({
   slug: row.evento.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
   data: {
@@ -21,6 +39,12 @@ const events = sheetData.map((row: any) => ({
 }));
 
 const sortedEvents = events.sort((a, b) => new Date(a.data.startDate).valueOf() - new Date(b.data.startDate).valueOf());
+/**
+ * Event sorting:
+ * - Sorts by start date (earliest first)
+ * - Uses timestamp comparison
+ * - Handles invalid dates gracefully
+ */
 ---
 
 <Layout title="Upcoming Events">
