@@ -20,6 +20,7 @@ import tailwind from '@astrojs/tailwind';
  */
 export default defineConfig({
   site: 'https://pedroitan.github.io/agenda_cultural',
+  base: '/agenda_cultural',
   integrations: [mdx(), sitemap(), tailwind()],
   markdown: {
     shikiConfig: {
